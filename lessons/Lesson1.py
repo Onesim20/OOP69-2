@@ -21,12 +21,6 @@ class Hero:
 
 #Обьект/Экземпляр на основе класса
 kirito = Hero('Kirito',100,10000)
-asuna = Hero('Kirito',100,10000)
+asuna = Hero('Asuna',100,10000)
 
 
-git init
-git add Homework1.py
-git commit -m "Add Hero class"
-git branch -M main
-git remote add origin https://github.com/твой_логин/название_репо.git
-git push -u origin main

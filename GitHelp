@@ -1,0 +1,6 @@
+git init
+git add Homework4.py
+git commit -m "Магические методы"
+git branch -M main
+git remote add origin https://github.com/Onesim20/OOP69-2.git
+git push -u origin main

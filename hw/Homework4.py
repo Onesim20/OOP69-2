@@ -1,8 +1,54 @@
-import unittest
 
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)  # add assertion here
+import re
 
-if __name__ == '__main__':
-    unittest.main()
+rates = {
+    "KGS": 1,
+    "USD": 89,
+    "EUR": 96,
+    "RUB": 1.2
+}
+
+currency_words = {
+    "сом": "KGS", "сома": "KGS", "сомов": "KGS", "kgs": "KGS", "som": "KGS",
+    "доллар": "USD", "доллара": "USD", "долларов": "USD", "usd": "USD", "$": "USD",
+    "евро": "EUR", "eur": "EUR", "€": "EUR",
+    "рубль": "RUB", "рубля": "RUB", "рублей": "RUB", "rub": "RUB",
+}
+
+
+class Money:
+    def __init__(self, amount, currency):
+        self.amount = amount
+        self.currency = currency
+
+    def convert_to_kgs(self):
+        return self.amount * rates[self.currency]
+
+    def __add__(self, other):
+        if self.currency == other.currency:
+            return Money(self.amount + other.amount, self.currency)
+        total_kgs = self.convert_to_kgs() + other.convert_to_kgs()
+        return Money(total_kgs, "KGS")
+
+    def __sub__(self, other):
+        if self.currency == other.currency:
+            return Money(self.amount - other.amount, self.currency)
+        total_kgs = self.convert_to_kgs() - other.convert_to_kgs()
+        return Money(total_kgs, "KGS")
+
+    def __mul__(self, number):
+        return Money(self.amount * number, self.currency)
+
+    def __truediv__(self, number):
+        return Money(self.amount / number, self.currency)
+
+    def __str__(self):
+        return f"{self.amount} {self.currency}"
+
+
+def parse_money(text):
+    match = re.search(r"([\d.,]+)\s*([а-яА-Яa-zA-Z$€]+)", text)
+    amount = float(match.group(1).replace(",", "."))
+    word = match.group(2).lower()
+    currency = currency_words.get(word)
+    return Money(amount, currency)
