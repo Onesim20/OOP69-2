@@ -8,8 +8,12 @@ class Hero:
     def action(self):
         print(f"{self.name} готов к бою!")
 
+# Проверка задачи 1 (раскомментируйте, чтобы увидеть вывод)
+# hero1 = Hero("Onesim", 10, 100)
+# hero1.action()
 
-# ЗАДАЧА 2: Дочерние классы MageHero и WarriorHero
+
+# ЗАДАЧА 2: Дочерние классы MageHero и WariorHero
 class MageHero(Hero):
     def __init__(self, name, lvl, hp, mp):
         super().__init__(name, lvl, hp)
@@ -22,6 +26,12 @@ class MageHero(Hero):
 class WarriorHero(MageHero):
     def action(self):
         print(f"Воин {self.name} рубит мечом! Уровень: {self.lvl}")
+
+# Проверка задачи 2
+# merlin = MageHero("Merlin", 50, 100, 150)
+# merlin.action()
+# conan = WarriorHero("Conan", 50, 120, 0)
+# conan.action()
 
 
 # ЗАДАЧА 3: Класс BankAccoynt
@@ -45,7 +55,7 @@ class BankAccount:
     def bonus_for_level(self):
         return self.hero.lvl * 10
 
-# ЗАДАЧА 4: Магиические методы
+ # ЗАДАЧА 4: Магиические методы
     def __str__(self):
         return f"{self.hero.name} | Баланс: {self._balance} SOM"
 
@@ -56,3 +66,29 @@ class BankAccount:
 
     def __eq__(self, other):
         return type(self.hero) == type(other.hero) and self.hero.lvl == other.hero.lvl
+
+# Проверка задачи 3
+
+# merlin = MageHero("Merlin", 50, 100, 150)
+# acc1 = BankAccount(merlin, 5000, "1234", "Simba")
+# print(acc1.login("1234"))
+# print(acc1.full_info)
+# print(acc1.get_bank_name())
+# print(acc1.bonus_for_level())
+
+#  Проверка задачи 4
+# merlin = MageHero("Merlin", 50, 100, 150)
+# merlin2 = MageHero("Merlin", 50, 100, 150)
+# conan = WarriorHero("Conan", 50, 120, 0)
+# acc1 = BankAccount(merlin, 5000, "1234", "Simba")
+# acc2 = BankAccount(merlin2, 3000, "1234", "Simba")
+# acc3 = BankAccount(conan, 2000, "1234", "Simba")
+# print(acc1)
+# print(acc2)
+# print("Сумма счетов двух магов:", acc1 + acc2)
+# try:
+#     acc1 + acc3
+# except TypeError as e:
+#     print("Ошибка:", e)
+# print("Mage1 == Mage2 ?", acc1 == acc2)
+# print("Mage1 == Warrior ?", acc1 == acc3)
